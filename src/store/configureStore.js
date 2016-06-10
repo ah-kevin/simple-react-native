@@ -1,4 +1,4 @@
-import {applyMiddleware, createStore} from 'redux';
+import {applyMiddleware, createStore, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {autoRehydrate, persistStore} from 'redux-persist';
 import {AsyncStorage} from 'react-native';
@@ -11,19 +11,22 @@ var logger = createLogger({
   collapsed: true,
   duration: true,
 });
-let middlewares = [
-  logger,
-  thunk
-]
-let createAppStore = applyMiddleware(...middlewares)(createStore);
-
 export default function configureStore (onComplete:?() => void) {
-  const store = autoRehydrate()(createAppStore)(reducers);
+  const store = createStore(
+    reducers,
+    autoRehydrate(),
+    compose(
+      applyMiddleware(thunk, logger)
+    )
+  );
   let opt = {
     storage: AsyncStorage,
     transform: []
   }
   persistStore(store, opt, onComplete);
+  if (isDebuggingInChrome) {
+    window.store = store;
+  }
   return store;
 }
 

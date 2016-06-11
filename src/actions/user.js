@@ -31,9 +31,6 @@ export function logIn(opt){
       });
   }
 }
-
-
-
 // skip login
 export function skipLogin(){
   return {
@@ -41,8 +38,6 @@ export function skipLogin(){
     'user': skipUser,
   }
 }
-
-
 // logout
 export function logOut(){
   return {

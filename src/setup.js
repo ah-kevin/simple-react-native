@@ -16,6 +16,7 @@ class setup extends Component {
   }
   render () {
     if (this.state.isLoading) {
+      console.log('loading app')
       return null;
     }
     return (

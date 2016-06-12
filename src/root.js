@@ -21,8 +21,7 @@ class root extends Component {
           To get started, edit index.ios.js
         </Text>
         <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          1232
         </Text>
       </View>
     );
